@@ -1,0 +1,42 @@
+<%- model_class = Proyecto -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:nombre) %></th>
+      <th><%= model_class.human_attribute_name(:descripcion) %></th>
+      <th><%= model_class.human_attribute_name(:fechainico) %></th>
+      <th><%= model_class.human_attribute_name(:fechafinalizacion) %></th>
+      <th><%= model_class.human_attribute_name(:creado) %></th>
+      <th><%=t '.actions', :default => t("helpers.acciones") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @proyectos.each do |proyecto| %>
+      <tr>
+        <td><%= link_to proyecto.id, proyecto_path(proyecto) %></td>
+        <td><%= proyecto.nombre %></td>
+        <td><%= proyecto.descripcion %></td>
+        <td><%= proyecto.fechainico %></td>
+        <td><%= proyecto.fechafinalizacion %></td>
+        <td><%=l proyecto.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.Editar")),
+                      edit_proyecto_path(proyecto), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.Eliminar")),
+                      proyecto_path(proyecto),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Esta seguro?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.nuevo")),
+            new_proyecto_path,
+            :class => 'btn btn-primary' %>

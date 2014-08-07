@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombrecompleto: MyString
+  dependencia: MyString
+  estudios: MyString
+  proyectos_id: 
+
+two:
+  nombrecompleto: MyString
+  dependencia: MyString
+  estudios: MyString
+  proyectos_id: 

@@ -1,0 +1,27 @@
+<%- model_class = Proyecto -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:nombre) %>:</strong></dt>
+  <dd><%= @proyecto.nombre %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
+  <dd><%= @proyecto.descripcion %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:fechainico) %>:</strong></dt>
+  <dd><%= @proyecto.fechainico %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:fechafinalizacion) %>:</strong></dt>
+  <dd><%= @proyecto.fechafinalizacion %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.Atras")),
+              proyectos_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.Editar")),
+              edit_proyecto_path(@proyecto), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.Eliminar")),
+              proyecto_path(@proyecto),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Esta seguro?')) },
+              :class => 'btn btn-danger' %>
+</div>
