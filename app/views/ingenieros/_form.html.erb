@@ -1,11 +1,11 @@
-<%= simple_form_for @ingeniero, :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_form_for[@proyecto,@ingenieros], :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :nombrecompleto %>
   <%= f.input :dependencia %>
   <%= f.input :estudios %>
   <%= f.input :proyectos_id %>
   <div class="form-actions">
-    <%= f.button :submit, :class => 'btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                ingenieros_path, :class => 'btn' %>
+    <%= f.button :submit,'Crear ingeniero', :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.Cancelar")),
+               proyecto_ingenieros_path(@proyecto), :class => 'btn' %>
   </div>
 <% end %>

@@ -1,5 +1,5 @@
 class IngenierosController < ApplicationController
-  before_action :set_ingeniero, only: [:show, :edit, :update, :destroy]
+  before_action :set_ingeniero, only: [:show, :edit, :update, :destroy, :index, :new, :create]
 
   # GET /ingenieros
   # GET /ingenieros.json
@@ -14,7 +14,7 @@ class IngenierosController < ApplicationController
 
   # GET /ingenieros/new
   def new
-    @ingeniero = Ingeniero.new
+    @ingenieros = proyecto.ingenieros.all
   end
 
   # GET /ingenieros/1/edit
@@ -25,10 +25,10 @@ class IngenierosController < ApplicationController
   # POST /ingenieros.json
   def create
     @ingeniero = Ingeniero.new(ingeniero_params)
-
+    @ingeniero.proyecto_id = @proyecto_id
     respond_to do |format|
       if @ingeniero.save
-        format.html { redirect_to @ingeniero, notice: 'Ingeniero was successfully created.' }
+        format.html { redirect_to proyecto_ingenieros_path(@proyecto), notice: 'Ingeniero was successfully created.' }
         format.json { render :show, status: :created, location: @ingeniero }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class IngenierosController < ApplicationController
   def update
     respond_to do |format|
       if @ingeniero.update(ingeniero_params)
-        format.html { redirect_to @ingeniero, notice: 'Ingeniero was successfully updated.' }
+        format.html { redirect_to proyecto_ingenieros_path(@proyecto), notice: 'Ingeniero was successfully updated.' }
         format.json { render :show, status: :ok, location: @ingeniero }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class IngenierosController < ApplicationController
   def destroy
     @ingeniero.destroy
     respond_to do |format|
-      format.html { redirect_to ingenieros_url, notice: 'Ingeniero was successfully destroyed.' }
+      format.html { redirect_to proyecto_ingenieros_path(@proyecto), notice: 'Ingeniero was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,7 +64,8 @@ class IngenierosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ingeniero
-      @ingeniero = Ingeniero.find(params[:id])
+      @proyecto = Proyecto.find(params[:proyecto_id])
+      @ingeniero = Ingeniero.find(params[:id]) if params[:id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

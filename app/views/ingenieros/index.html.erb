@@ -10,26 +10,26 @@
       <th><%= model_class.human_attribute_name(:dependencia) %></th>
       <th><%= model_class.human_attribute_name(:estudios) %></th>
       <th><%= model_class.human_attribute_name(:proyectos_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th><%= model_class.human_attribute_name(:creado) %></th>
+      <th><%=t '.actions', :default => t("helpers.acciones") %></th>
     </tr>
   </thead>
   <tbody>
     <% @ingenieros.each do |ingeniero| %>
       <tr>
-        <td><%= link_to ingeniero.id, ingeniero_path(ingeniero) %></td>
+        <td><%= link_to ingeniero.id, proyecto_ingeniero_path(@proyecto,ingeniero) %></td>
         <td><%= ingeniero.nombrecompleto %></td>
         <td><%= ingeniero.dependencia %></td>
         <td><%= ingeniero.estudios %></td>
         <td><%= ingeniero.proyectos_id %></td>
         <td><%=l ingeniero.created_at %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_ingeniero_path(ingeniero), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      ingeniero_path(ingeniero),
+          <%= link_to t('.edit', :default => t("helpers.links.Editar")),
+                      edit_proyecto_ingeniero_path(@proyecto,ingeniero), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.Eliminar")),
+                      proyecto_ingeniero_path(@proyecto,ingeniero),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Esta seguro?')) },
                       :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
@@ -37,6 +37,11 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_ingeniero_path,
+<%= link_to t('.new', :default => t("helpers.links.Nuevo")),
+            new_proyecto_ingeniero_path(@proyecto),
             :class => 'btn btn-primary' %>
+
+             <%= link_to t('.back', :default => t("helpers.links.Atras")),
+            proyectos_path,
+            :class => 'btn btn-primary' %> 
+</div>

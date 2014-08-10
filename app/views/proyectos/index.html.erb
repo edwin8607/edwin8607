@@ -5,6 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+     <th>integrantes</th>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:nombre) %></th>
       <th><%= model_class.human_attribute_name(:descripcion) %></th>
@@ -17,6 +18,7 @@
   <tbody>
     <% @proyectos.each do |proyecto| %>
       <tr>
+        <td><%= link_to 'Equipo', proyecto_ingenieros_path(proyecto), :class => 'btn btn-mini' %></td>  
         <td><%= link_to proyecto.id, proyecto_path(proyecto) %></td>
         <td><%= proyecto.nombre %></td>
         <td><%= proyecto.descripcion %></td>
